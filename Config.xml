@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding='utf-8'?>
+<Configuration>
+	<SetupConfiguration>
+        <PlatformConfiguration>
+			<!-- Value can be Windows/Linux/MAC" -->
+            <PlatformName>Windows</PlatformName>
+        </PlatformConfiguration>
+		<WebDriverConfiguration>
+			<WebDriverPath>E:\MyData\CodingRound\chromedriver_win32\chromedriver.exe</WebDriverPath>
+			<WebDriverVersion>72.0.3626.109</WebDriverVersion>
+        </WebDriverConfiguration>
+		<WebsiteConfiguration>
+            <Site>https://www.cleartrip.com/</Site>             
+            <Credential>
+                <UserName></UserName>
+                <Password></Password>
+            </Credential>
+		</WebsiteConfiguration>
+	</SetupConfiguration>
+</Configuration>
