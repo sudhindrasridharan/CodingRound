@@ -30,6 +30,7 @@ import Common
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),
                 'src/')))
 import Flightbooking
+import Hotelbooking
 
 class Driver:
     results = ""
@@ -68,7 +69,8 @@ if __name__ == '__main__':
     objDriver = Driver()
     objcommon = Common.Common()
     objflightbooking = Flightbooking.Flightbooking()
-
+    objhotelbooking = Hotelbooking.Hotelbooking()
+    
     # Creation of Logger File
     CurrentEpochTime = objcommon.getCurrentEpochTime()
     
@@ -103,5 +105,6 @@ if __name__ == '__main__':
     # Command to open a web driver Open of chrome
     driverhandler = objcommon.openwebdriver(webdriverpath)
     driverhandler.get(WebSite)
-    objflightbooking.test_onewayjourney(logger, driverhandler,2)
+    objhotelbooking.test_hoteljourney(logger, driverhandler, 2, 5)
+    # objflightbooking.test_onewayjourney(logger, driverhandler,2)
     
