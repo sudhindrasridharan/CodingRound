@@ -106,17 +106,17 @@ if __name__ == '__main__':
     
     # Command to open a web driver Open of chrome
     try:
-        if input_parameters.test_suite_name == 'flight':
+        if input_parameters.test_suite_name.casefold() == 'flight':
             print("Flight TEST")
             driverhandler = objcommon.openwebdriver( webdriverpath )
             driverhandler.get( WebSite )
             objflightbooking.test_onewayjourney(logger, driverhandler,2)
-        elif input_parameters.test_suite_name == 'hotel':
+        elif input_parameters.test_suite_name.casefold() == 'hotel':
             driverhandler = objcommon.openwebdriver( webdriverpath )
             driverhandler.get( WebSite )
             print("Hotel TEST")
             objhotelbooking.test_hoteljourney(logger, driverhandler, 2, 5)
-        elif input_parameters.test_suite_name == 'signin':
+        elif input_parameters.test_suite_name.casefold() == 'signin':
             driverhandler = objcommon.openwebdriver( webdriverpath )
             driverhandler.get( WebSite )
             print("Sign In")
