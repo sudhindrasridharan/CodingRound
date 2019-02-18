@@ -31,6 +31,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),
                 'src/')))
 import Flightbooking
 import Hotelbooking
+import Signin
 
 class Driver:
     results = ""
@@ -50,15 +51,15 @@ class Driver:
         cli_parser.add_argument('-i', '--config-file',
                                 dest='config_file',
                                 help='Provide the absolute path for configuration file. This is mandatory argument.')
-        cli_parser.add_argument('-t', '--testsuite',
-                                dest='test_suite_file',
-                                help = 'Test file which consist list of test case to execute'
+        cli_parser.add_argument('-t', '--testsuitename',
+                                dest='test_suite_name',
+                                help = 'Test suite name to be execute Supported parameter is "fight, hotel and signin"'
                                        'This is mandatory argument.')
         result = cli_parser.parse_args()
         
         # Validation
-        if (len(list_input_args) == 1) or (not result.config_file) or (not result.test_suite_file):
-            print("Invalid Input Parameter")
+        if (len(list_input_args) == 1) or (not result.config_file) or (not result.test_suite_name):
+            cli_parser.print_help()
             sys.exit(1)
         print("Cli argument parsed successfully\n")
         return (result)
@@ -70,6 +71,7 @@ if __name__ == '__main__':
     objcommon = Common.Common()
     objflightbooking = Flightbooking.Flightbooking()
     objhotelbooking = Hotelbooking.Hotelbooking()
+    objsignin = Signin.Signin()
     
     # Creation of Logger File
     CurrentEpochTime = objcommon.getCurrentEpochTime()
@@ -103,8 +105,28 @@ if __name__ == '__main__':
     logger.info("Web Site Under Test : %s " % WebSite)
     
     # Command to open a web driver Open of chrome
-    driverhandler = objcommon.openwebdriver(webdriverpath)
-    driverhandler.get(WebSite)
-    objhotelbooking.test_hoteljourney(logger, driverhandler, 2, 5)
-    # objflightbooking.test_onewayjourney(logger, driverhandler,2)
+    try:
+        if input_parameters.test_suite_name == 'flight':
+            print("Flight TEST")
+            driverhandler = objcommon.openwebdriver( webdriverpath )
+            driverhandler.get( WebSite )
+            objflightbooking.test_onewayjourney(logger, driverhandler,2)
+        elif input_parameters.test_suite_name == 'hotel':
+            driverhandler = objcommon.openwebdriver( webdriverpath )
+            driverhandler.get( WebSite )
+            print("Hotel TEST")
+            objhotelbooking.test_hoteljourney(logger, driverhandler, 2, 5)
+        elif input_parameters.test_suite_name == 'signin':
+            driverhandler = objcommon.openwebdriver( webdriverpath )
+            driverhandler.get( WebSite )
+            print("Sign In")
+            objsignin.test_signin(logger, driverhandler)
+        else:
+            print("Invalid Test Suite Name")
+            sys.exit(1)
+    except Exception as err:
+        logger.error("Input Parameter is invalid %s " % err)
+
+    
+    
     

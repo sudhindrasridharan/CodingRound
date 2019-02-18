@@ -19,4 +19,9 @@ class homepage:
         Product_Flights_SEARCH_BUTTON_ID = "SearchBtn"
         Product_Hotel_SEARCH_BUTTON_ID = "SearchHotelsButton"
         
+        # Sign In
+        Product_Yourtrip_ID = "userAccountLink"
+        Product_Signin_ID = "SignIn"
+        Product_Signin_BUTTON_ID = "signInButton"  # //*[@id="signInButton"]
+        Product_Error_ID = "errors1"
         
